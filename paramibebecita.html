@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>San Valentín Especial</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe6f1;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('ruta_de_tu_imagen_y_ella.jpg'); /* Cambia la imagen que desees */
+      background-size: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .photo-container {
+      margin-bottom: 20px;
+    }
+
+    .photo-container img {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .animated-text {
+      font-size: 36px;
+      font-weight: bold;
+      color: #ff66b2;
+      animation: slideIn 2s ease-out forwards;
+      margin-bottom: 20px;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    button {
+      background: linear-gradient(to right, #ff66b2, #ff3399);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 10px 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .img-container {
+      margin-top: 20px;
+    }
+
+    .follow-up-text {
+      font-size: 22px;
+      color: #ff3399;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .final-message {
+      font-size: 30px;
+      font-weight: bold;
+      color: #ff66b2;
+      margin-top: 20px;
+    }
+
+    .image-placeholder {
+      display: none;
+      width: 300px;
+      margin: 20px auto;
+      border-radius: 15px;
+      border: 3px solid #ff66b2;
+      padding: 10px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .sticker-left, .sticker-right {
+      position: absolute;
+      top: 50%;
+      width: 100px;
+      height: 100px;
+      z-index: 1;
+    }
+
+    .sticker-left {
+      left: 10%;
+    }
+
+    .sticker-right {
+      right: 10%;
+    }
+
+    .video-container {
+      margin-top: 20px;
+      display: none;
+      text-align: center;
+    }
+
+    video {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 15px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Fondo de la página -->
+  <div class="background-image"></div>
+
+  <!-- Sticker de gatito a la izquierda -->
+  <div class="sticker-left">
+    <img src="gatojo.jpg" alt="Sticker Gatito" width="90" height="90">
+  </div>
+
+  <!-- Sticker de gatito a la derecha -->
+  <div class="sticker-right">
+    <img src="ambos.png" alt="Sticker Gatito" width="100" height="100">
+  </div>
+
+  <!-- Foto inicial -->
+  <div class="photo-container">
+    <img src="mipaopao.jpeg" alt="mipaopao">
+  </div>
+
+  <!-- Título principal -->
+  <h1 class="animated-text">Mi reinita, ¿quieres ser mi San Valentín? 💖</h1>
+
+  <!-- Botones de respuesta -->
+  <div class="button-container">
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <!-- Zona para las fotos -->
+  <div class="img-container">
+    <mp4 id="noImage" class="" src="" alt="Foto no">
+    <img id="yesImage" class="image-placeholder" src="" alt="Foto sí">
+  </div>
+
+  <!-- Mensaje que aparece cuando se elige "No" -->
+  <div id="followUpNo" class="hidden">
+    <p id="message" class="follow-up-text">¡Oh no! ¿Seguro que no? 💔</p>
+    <br>
+    <button id="tryAgainBtn">¡Vamos, di que sí!</button>
+  </div>
+
+  <!-- Mensaje final que aparece cuando se elige "Sí" -->
+  <div id="finalYes" class="hidden">
+    <div class="final-message">
+      <p>¡Yay! ¡Eres mi San Valentín! 🎉</p>
+      <p>Tú y yo, mi amorcito, tenemos una cita el viernes, yo invito, tú pagas, bb. 💕</p>
+      <div class="img-container">
+        <img src="muchocorazon.png" alt="Foto feliz de los dos" style="width: 300px; border-radius: 15px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor para videos -->
+  <div id="videoContainer" class="video-container">
+    <video id="video1" controls>
+      <source src="siencist.mp4" type="video/mp4">
+      Tu navegador no soporta este formato de video.
+    </video>
+  </div>
+
+  <div id="videoContainer2" class="video-container">
+    <video id="video2" controls>
+      <source src="loveyou.mp4" type="video/mp4">
+      Tu navegador no soporta este formato de video.
+    </video>
+  </div>
+
+  <div id="videoContainer3" class="video-container">
+    <video id="video3" controls>
+      <source src="ruta_del_video_3.mp4" type="video/mp4">
+      Tu navegador no soporta este formato de video.
+    </video>
+  </div>
+
+  <!-- Sonido de fondo -->
+  <audio autoplay loop>
+    <source src="imnot.mp4" type="audio/mp4">
+    Tu navegador no soporta el formato de audio.
+  </audio>
+
+  <script>
+    let intentos = 0;
+    let videoPlayed = false;
+
+    // Función para cambiar las fotos dependiendo de la respuesta
+    function updateImages() {
+      const noImages = [
+        'ruta_de_foto_no1.jpg', // Foto de no 1
+        'ruta_de_foto_no2.jpg', // Foto de no 2
+        'ruta_de_foto_no3.jpg'  // Foto de no 3
+      ];
+      
+      const yesImages = [
+        'ruta_de_foto_yes1.jpg', // Foto de yes 1
+        'ruta_de_foto_yes2.jpg'  // Foto de yes 2
+      ];
+
+      // Cambiar las fotos con base en los intentos
+      document.getElementById('noImage').src = noImages[intentos % noImages.length];
+      document.getElementById('yesImage').src = yesImages[0]; // Aquí podemos poner una sola imagen final
+
+      // Mostrar u ocultar las imágenes dependiendo de la respuesta
+      if (intentos > 0) {
+        document.getElementById('noImage').style.display = 'block';
+      } else {
+        document.getElementById('noImage').style.display = 'none';
+      }
+    }
+
+    // Cambiar el texto del botón de "No" según los intentos
+    function updateButtonText() {
+      const buttonTexts = [
+        'Ñoñoño 😢', 
+        '¡Vuelve a apretar! 🥺', 
+        'Nooo, por favor, di que sí 😭', 
+        '¿Seguro? Vuelve a presionar 🫣', 
+        'Vamos, di que sí, mi amorcito 😍'
+      ];
+      document.getElementById("noBtn").innerText = buttonTexts[intentos % buttonTexts.length];
+    }
+
+    // Respuesta cuando se dice "Sí"
+    document.getElementById("yesBtn").addEventListener("click", function() {
+      // Mostrar el video
+      if (!videoPlayed) {
+        document.getElementById("videoContainer").style.display = "block";
+        videoPlayed = true;
+      }
+      
+      // Mostrar el mensaje final después de que se haya mostrado el video
+      setTimeout(function() {
+        document.getElementById("finalYes").classList.remove("hidden");
+        document.getElementById("yesBtn").style.display = "none";
+        document.getElementById("noBtn").style.display = "none";
+      }, 5000); // Espera 5 segundos antes de mostrar el mensaje final
+    });
+
+    // Respuesta cuando se dice "No"
+    document.getElementById("noBtn").addEventListener("click", function() {
+      intentos++;
+      document.getElementById("followUpNo").classList.remove("hidden");
+      updateImages();
+      updateButtonText();
+
+      // Cambiar el mensaje dependiendo del número de intentos
+      switch (intentos) {
+        case 1:
+          document.getElementById("message").innerText = "¡Ay, mi chinchosa! ¿Seguro que no? 😘";
+          break;
+        case 2:
+          document.getElementById("message").innerText = "Vamos, di que sí, que soy tu príncipe 💕";
+          break;
+        case 3:
+          document.getElementById("message").innerText = "Dime que sí, por favor, mi reina 👑";
+          break;
+        case 4:
+          document.getElementById("message").innerText = "¡Di que sí por Neymar! 😭";
+          break;
+        case 5:
+          document.getElementById("message").innerText = "Vamos, mi amor, di que sí por Skibidi Toilet 🕺";
+          break;
+        case 6:
+          document.getElementById("message").innerText = "Dime que sí, por el gatito triste 😿";
+          break;
+        case 7:
+          document.getElementById("message").innerText = "¡Sé que lo harás! 😘";
+          break;
+      }
+    });
+
+    // Reiniciar el proceso
+    document.getElementById("tryAgainBtn").addEventListener("click", function() {
+      document.getElementById("followUpNo").classList.add("hidden");
+      document.getElementById("noBtn").innerText = "No";
+      updateImages();
+    });
+  </script>
+
+</body>
+</html>
